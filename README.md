@@ -1,1 +1,0 @@
-# Just Tech News - Module 13 ORM
