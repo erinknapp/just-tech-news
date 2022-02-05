@@ -38,11 +38,7 @@ router.get('/:id', (req, res) => {
         through: Vote,
         as: 'voted_posts'
       }
-    ],
-    res.render('single-post', {
-      post,
-      loggedIn: req.session.loggedIn
-    })
+    ]
   })
     .then(dbUserData => {
       if (!dbUserData) {
@@ -69,7 +65,7 @@ router.post('/', (req, res) => {
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
-  
+
         res.json(dbUserData);
       });
     })
@@ -102,7 +98,7 @@ router.post('/login', (req, res) => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
-  
+
       res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
   });
@@ -113,8 +109,7 @@ router.post('/logout', (req, res) => {
     req.session.destroy(() => {
       res.status(204).end();
     });
-  }
-  else {
+  } else {
     res.status(404).end();
   }
 });
